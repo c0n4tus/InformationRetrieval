@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/twitter4j-4.0.4/lib/twitter4j-core-4.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/twitter4j.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/commons-lang3-3.4-bin/commons-lang3-3.4/commons-lang3-3.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Category-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Combined-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Concept-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-ConstraintQuery-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Entity-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-FeedLinks-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Image-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Keyword-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Language-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Microformats-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Parameter-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Relations-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Sentiment-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-Taxonomy-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/Alchemy/AlchemyAPI-TextExtract-Test.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/tika-app-1.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/google-api-translate-java-0.97.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/gtranslateapi-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/archN/Documents/My jars/microsoft-translator-java-api-0.6.2-jar-with-dependencies.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

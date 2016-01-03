@@ -1,0 +1,167 @@
+package tweetCrawler;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
+import twitter4j.*;
+import twitter4j.auth.AccessToken;
+import twitter4j.conf.ConfigurationBuilder;
+import twitter4j.json.DataObjectFactory;
+
+public class tweepyRecollection {
+
+	public static void main(String[] args) throws TwitterException, ParseException, IOException 
+	{
+		String fileName = ("C:\\Users\\archN\\new3.txt");
+		File outputFile = new File("C:\\Users\\archN\\tweets.txt");
+		FileReader fileReader = new FileReader(fileName);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        FileWriter fileWriter = new FileWriter(outputFile);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write("[");
+		ConfigurationBuilder twitterConfig = new ConfigurationBuilder();
+		twitterConfig.setOAuthAccessToken("294308874-6mkgeDkXsGa0MDuf75gh1QWodhOg8WfKg3Hf0Rx3");
+		twitterConfig.setOAuthAccessTokenSecret("gFcSiCXX0k5DYwh3J4cx0QyT9AtLB4XqMxemnO2wlWiBK");
+		twitterConfig.setOAuthConsumerKey("CSTOEoInFfuyU6Gy5B3J872MD");
+		twitterConfig.setOAuthConsumerSecret("i7jQZXfcCzXfKu0lyqDc0uHyEabNfx9w7Qe514B5wCgWxHJ2v1");
+	    TwitterFactory tf = new TwitterFactory(twitterConfig.build());
+	    Twitter twitter = tf.getInstance();
+	            List<Status> tweets = new ArrayList<Status>();
+	            String nextLine = null;
+
+	            List<Integer> tweetIdIndex = new ArrayList<Integer>(); 
+	            List<Long> tweetId = new ArrayList<Long>(); 
+	            String findStr = "u\'id\'";
+	            int findStrLength = findStr.length();
+	            while((nextLine = bufferedReader.readLine()) != null ) {
+	            	
+	            	
+	            	tweetId.add(Long.parseLong(nextLine.trim()));
+	            	/*for(int i=0;i<nextLine.length();i++){
+	                    if(findStr.startsWith(Character.toString(nextLine.charAt(i)))){
+	                        if(nextLine.substring(i).length() >= findStrLength){
+	                            if(nextLine.substring(i, i+findStrLength).equals(findStr)){
+	                                if(nextLine.charAt(i+25) == 'L')
+	                                {
+	                                	tweetId.add(Long.parseLong(nextLine.substring(i+7, i+25)));
+	                                }
+	                            }
+	                        }
+	                    }
+	                }*/
+	            } 
+	            
+	            for (Long Id : tweetId)
+	            {
+	            	try
+	            	{
+            		System.out.println(Id);
+            		tweets.add(twitter.showStatus(Id));
+	            	}
+	            	catch (Exception e)
+	            	{
+	            		e.printStackTrace();
+	            		continue;
+	            	}
+	            }
+	            AlchemyInt.retrieveTweets(tweets);
+	            
+	            
+	            /*for (int i=0;i<tweets.size();i++) 
+	            {
+	            	if(i==(tweets.size()-1))
+	            	{
+	            		if (tweets.get(i).getLang().equalsIgnoreCase("en"))
+		            	{
+	            			String jsonString = processTweet(tweets.get(i));
+	            			bufferedWriter.write(jsonString);
+		            	}
+		            	if (tweets.get(i).getLang().equalsIgnoreCase("ru"))
+		            	{
+		            		String jsonString = processTweet(tweets.get(i));
+		            		bufferedWriter.write(jsonString + "\n");
+		            	}
+		            	if (tweets.get(i).getLang().equalsIgnoreCase("de"))
+		            	{
+		            		String jsonString = processTweet(tweets.get(i));
+		            		bufferedWriter.write(jsonString + "\n");
+		            	}
+	            	}
+	            	else
+	            	{
+	            		if (tweets.get(i).getLang().equalsIgnoreCase("en"))
+	            		{
+	            			String jsonString = processTweet(tweets.get(i));
+	            			jsonString += ",";
+	            			bufferedWriter.write(jsonString + "\n");
+	            		}
+	            		if (tweets.get(i).getLang().equalsIgnoreCase("ru"))
+		            	{
+	            			String jsonString = processTweet(tweets.get(i));
+	            			jsonString += ",";
+	            			bufferedWriter.write(jsonString + "\n");
+		            	}
+		            	if (tweets.get(i).getLang().equalsIgnoreCase("de"))
+		            	{
+		            		String jsonString = processTweet(tweets.get(i));
+		            		jsonString += ",";
+		            		bufferedWriter.write(jsonString + "\n");
+		            	}
+	            	}
+	            	//System.out.println(tweet.toString() + "\n");
+	                //System.out.println(tweet.getHashtagEntities() + " : " + tweet.getLang() + " : " +tweet.getGeoLocation()+ " : " +tweet.getText()+"\n");
+	            }
+	            bufferedWriter.write("]");
+	            bufferedWriter.close();
+	}
+	static String processTweet(Status tweet ) throws ParseException
+	{
+		String originalDateString = tweet.getCreatedAt().toString();
+		Date date = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(originalDateString);
+		String solrDateString = new SimpleDateFormat("YYYY-MM-dd'T'hh:mm:ss'Z'").format(date);
+		URLEntity[] urls = tweet.getURLEntities();
+		HashtagEntity[] hashEnts = tweet.getHashtagEntities();
+		String escapedText = StringEscapeUtils.escapeJava(tweet.getText());
+		String jsonString = "{"  + "\"id\":\"" + tweet.getId()+ "\"," + "\"text_ru\":\"" + escapedText + "\"," + "\"lang\":\"" + tweet.getLang()+ "\"," + "\"created_at\":\"" + solrDateString + "\"," + "\"location\":\"" + tweet.getPlace() + "\"," + "\"tweet_urls\":[" ;
+		for (int i=0; i < urls.length; i++)
+		{
+			if (i == (urls.length-1))
+			{
+				jsonString += "\"" + urls[i].getExpandedURL() + "\"";
+			}
+			else
+			{
+				jsonString += "\"" + urls[i].getExpandedURL() + "\",";
+			}
+		}
+		jsonString += "]" + "," + "\"tweet_hashtags\":[";
+		for ( int i=0; i < hashEnts.length;i++)
+		{
+			if ( i == (hashEnts.length - 1))
+			{
+				jsonString += "\"" + hashEnts[i].getText() + "\"";
+			}
+			else
+			{
+				jsonString += "\"" + hashEnts[i].getText() + "\",";
+			}
+		}
+		return jsonString += " ]}";
+	}*/
+}
+
+}

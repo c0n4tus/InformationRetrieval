@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="tweetCrawler.EntityTest"/>
+<fullyQualifiedTypeName name="javax.print.DocFlavor.STRING"/>
+<fullyQualifiedTypeName name="java.io.StreamCorruptedException"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.gtranslate.Language"/>
+<fullyQualifiedTypeName name="com.cybozu.labs.langdetect.Detector"/>
+<fullyQualifiedTypeName name="com.cybozu.labs.langdetect.DetectorFactory"/>
+<fullyQualifiedTypeName name="org.apache.tika.language.LanguageIdentifier"/>
+<fullyQualifiedTypeName name="com.google.api.GoogleAPI"/>
+<fullyQualifiedTypeName name="java.net.URLEncoder"/>
+<fullyQualifiedTypeName name="javax.net.ssl.HttpsURLConnection"/>
+<fullyQualifiedTypeName name="com.google.gson.JsonParser"/>
+<fullyQualifiedTypeName name="com.google.gson.JsonElement"/>
+<fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
+<fullyQualifiedTypeName name="com.google.gson.JsonSyntaxException"/>
+<fullyQualifiedTypeName name="com.gtranslate.Translator"/>
+<fullyQualifiedTypeName name="com.memetix.mst.translate.Translate"/>
+<fullyQualifiedTypeName name="com.memetix.mst.language.Language"/>
+<fullyQualifiedTypeName name="com.memetix.mst.detect.Detect"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+<fullyQualifiedTypeName name="java.net.HttpURLConnection"/>
+<fullyQualifiedTypeName name="java.net.Proxy"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.io.FileReader"/>
+<fullyQualifiedTypeName name="java.io.FileWriter"/>
+<fullyQualifiedTypeName name="java.util.StringTokenizer"/>
+</qualifiedTypeNameHistroy>

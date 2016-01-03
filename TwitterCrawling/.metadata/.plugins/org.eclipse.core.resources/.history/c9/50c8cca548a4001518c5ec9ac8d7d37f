@@ -1,0 +1,100 @@
+package tweetCrawler;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
+public class ContentTagJson {
+
+	public static void main(String[] args) 
+	{
+		String fileName = "C:\\Users\\archN\\Collections\\French\\testDe1449565521698.txt";
+		File outputFile = new File("C:\\Users\\archN\\Collections\\French\\testDe1449565521698_pro.txt");
+
+        // This will reference one line at a time
+        String line = null;
+        String nextLine = null;
+
+        /*code to content tag tweets
+         * try {
+            
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+    		PrintWriter writer = new PrintWriter(outputFile, "UTF-8");
+            String findStr = "\"text_de\":\"";
+            String findStr1 = "\"content_tags\":[";
+            String findStr2 = "],\"tweet_urls\"";
+            int findStrLength = findStr.length();
+            int findStrLength1 = findStr1.length();
+            int findStrLength2 = findStr2.length();
+            while((nextLine = bufferedReader.readLine()) != null ) {
+            	int indexOfText = nextLine.indexOf(findStr)+findStrLength;
+            	String text = nextLine.substring(indexOfText, nextLine.indexOf("\",\"lang\"", indexOfText));
+            	String addTag = EntityTest.entityFinder(StringEscapeUtils.unescapeJava(text));
+            	int indexOfTag = nextLine.indexOf(findStr1)+findStrLength1;
+            	int endIndexOfTag = nextLine.indexOf(findStr2);
+            	String writeLine = nextLine.substring(0,indexOfTag ) + addTag + nextLine.substring(endIndexOfTag, nextLine.length() );
+            	writer.println(writeLine);
+            }
+            writer.close();
+        }
+        catch(Exception e) {
+        	
+        }*/
+        try {
+            
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+    		PrintWriter writer = new PrintWriter(outputFile, "UTF-8");
+            String findStr = "\"text_";
+            String findStr1 = "\"content_tags\":[";
+            String findStr2 = "],\"tweet_urls\"";
+            int findStrLength1 = findStr1.length();
+            while((nextLine = bufferedReader.readLine()) != null ) {
+            	if(nextLine.contains(findStr)) {
+            		if (nextLine.substring(nextLine.indexOf(findStr),nextLine.length()-1).contains("RT")){
+                		continue;
+                	}
+            	}
+            	else {
+            		writer.println(nextLine);
+            		continue;
+            	}
+            	int indexOfTag = nextLine.indexOf(findStr1)+findStrLength1;
+            	int endIndexOfTag = nextLine.indexOf(findStr2);
+            	String contentTag = nextLine.substring(indexOfTag,endIndexOfTag);
+            	String addTag = "";
+            	StringTokenizer st = new StringTokenizer(contentTag,",");
+            	while(st.hasMoreElements()) {
+            		String token = st.nextToken();
+            		if(token.contains("@")) {
+            			st.nextToken();
+            			continue;
+            		}
+            		else
+            			addTag += token + ",";
+            	}
+            	String writeLine = "";
+            	if(addTag.endsWith(","))
+            		writeLine = nextLine.substring(0,indexOfTag) + addTag.substring(0, addTag.length()-2) + nextLine.substring(endIndexOfTag, nextLine.length() );
+            	else
+            		writeLine = nextLine.substring(0,indexOfTag ) + addTag + nextLine.substring(endIndexOfTag, nextLine.length() );
+            	writer.println(writeLine);
+            }
+            writer.close();
+        }
+        catch(Exception e) {
+        	e.printStackTrace();
+        }
+
+
+	}
+}
